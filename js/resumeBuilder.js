@@ -10,7 +10,8 @@ var bio = {
     github: "hendryl"
   },
   blog: "-",
-  location: "Jakarta"
+  location: "Jakarta",
+  picture: "http://placehold.it/200x200"
 };
 
 var work = {
@@ -20,9 +21,15 @@ var work = {
       "title": "Intern Engineer",
       "location": "Jakarta",
       "dates": "2015 - now"
+    },
+    {
+      "employer": "Nippon Club",
+      "title": "Coordinator",
+      "location": "Jakarta",
+      "dates": "2014 - now"
     }  
   ]
-}
+};
 
 var education = {
   "schools": [
@@ -41,7 +48,7 @@ var education = {
       "url":"------"
     }
   ]
-}
+};
 
 var projects = {
   "projects": [
@@ -58,11 +65,43 @@ var projects = {
   ]
 }
 
+var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+var formattedName = HTMLheaderName.replace("%data%", bio.name);
+var formattedImage = HTMLbioPic.replace("%data%", bio.picture);
+
+$("#header").prepend(formattedRole);
+$("#header").prepend(formattedName);
+$("#header").prepend(formattedImage);
+
+//contacts
+var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+
+$("#topContacts").append(formattedMobile);
+$("#topContacts").append(formattedEmail);
+$("#topContacts").append(formattedGithub);
+
 if(bio.skills.length > 0){
   $("#header").append(HTMLskillsStart);
 
-  for(var skills in bio.skills){
-    var formattedSkills = HTMLskills.replace("%data%", bio.skills[skills]);
+  for(var skill in bio.skills){
+    var formattedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
     $("#skills").append(formattedSkills);
   }
+}
+
+for(job in work.jobs){
+  $("#workExperience").append(HTMLworkStart);
+  console.log(job);
+  var employer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+  var title = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+  var dates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+  var location = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+
+  var result = employer + title;
+
+  $(".work-entry:last").append(result);
+  $(".work-entry:last").append(dates);
+  $(".work-entry:last").append(location);
 }
