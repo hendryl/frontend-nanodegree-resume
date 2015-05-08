@@ -2,7 +2,7 @@ var bio = {
   name: "Hendry",
   role: "Web developer",
   welcomeMessage: "Welcome to my page",
-  skills: ["Sleeping", "Eating"],
+  skills: ["HTML", "CSS", "Javascript", "Objective-C"],
 
   contacts: {
     mobile: "08888888",
@@ -56,4 +56,13 @@ var projects = {
       "description":"This is a test project"
     }
   ]
+}
+
+if(bio.skills.length > 0){
+  $("#header").append(HTMLskillsStart);
+
+  for(var skills in bio.skills){
+    var formattedSkills = HTMLskills.replace("%data%", bio.skills[skills]);
+    $("#skills").append(formattedSkills);
+  }
 }
